@@ -1,0 +1,78 @@
+:root {
+    --border: 1px solid rgba(0, 0, 0, 0.3);
+    --mainColorX: #376ba0;
+    --mainColorO: #ffd154;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.colorX {
+    color: var(--mainColorX);
+}
+.colorO {
+    color: var(--mainColorO);
+}
+
+#cont-img {
+    margin: auto;
+    transform:translateY(-20%);
+    max-width: 400px;
+}
+img {
+    max-width: 100%;
+}
+/* form */
+#cont-form {
+    text-align: center;
+}
+/* form */
+
+#container {
+    width: 50%;
+    margin: auto;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.square {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.s1_1,
+.s2_1,
+.s1_2,
+.s2_2 {
+    border-bottom: var(--border);
+    border-right: var(--border);
+}
+
+.s1_3,
+.s2_3 {
+    border-bottom: var(--border);
+}
+
+.s3_1,
+.s3_2 {
+    border-right: var(--border);
+}
+
+.active{
+    background-color: rgb(173, 173, 173);
+}
+
+/* frasi descrittive */
+.sentence-desc {
+    text-align: center;
+    margin: 35px 0 ;
+}
