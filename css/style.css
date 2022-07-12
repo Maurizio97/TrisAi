@@ -49,21 +49,21 @@ img {
     align-items: center;
 }
 
-.s1_1,
-.s2_1,
-.s1_2,
-.s2_2 {
+.A1,
+.B1,
+.A2,
+.B2 {
     border-bottom: var(--border);
     border-right: var(--border);
 }
 
-.s1_3,
-.s2_3 {
+.A3,
+.B3 {
     border-bottom: var(--border);
 }
 
-.s3_1,
-.s3_2 {
+.C1,
+.C2 {
     border-right: var(--border);
 }
 
