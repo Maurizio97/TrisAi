@@ -16,74 +16,54 @@
 
 
     <div id="container">
-        <div id="cont-img">
+        <!-- <div id="cont-img">
             <a href="index.html">
                 <img src="asset/tris-logo.png" alt="logo">
             </a>
-        </div>
-
-        <!-- form per la stanza -->
-
-        <!-- create room -->
-        <div v-if="!stanza" id="cont-form">
-            <label for="stanza">Stanza</label><br>
-            <input type="text" v-model="stanzaInput"><br>
-            <!-- <label for="stanza">Nome</label><br>
-            <input type="text" v-model="nomeInput" value=" "><br> -->
-            <label for="player">Player</label><br>
-            <input type="text" v-model="playerInput"><br>
-            <a class="btn btn-primary" :href="`index.html?player=${playerInput}&stanza=${stanzaInput}`">Create Room</a>
-        </div>
-        <!-- /create room -->
-
-
-        <!-- join room -->
-        <div v-if="!stanza" id="cont-form">
-            <label for="stanza">Stanza</label><br>
-            <input type="text" v-model="stanzaInput"><br>
-            <a class="btn btn-primary" :href="`index.html?join=true&stanza=${stanzaInput}`">Join Room</a>
-        </div>
-        <!-- /join room -->
-
-        <!-- /form per la stanza -->
+            create room
+            <div v-if="!stanza" id="cont-form">
+                <a class="btn btn-primary">Gioca</a>
+            </div>
+            /create room
+        </div> -->
 
         <!-- game -->
-        <div v-if="stanza">
-            <!-- frasi descrittive -->
-            <h1 v-if="click" class="sentence-desc">
-                <span :class="player == 'x' ? 'colorX' : 'colorO'">{{player}} </span> - Aspetta il tuo turno
-            </h1>
-            <h1 v-else class="sentence-desc">
-                <span :class="player == 'x' ? 'colorX' : 'colorO'">{{player}} </span> - Tocca a te
-            </h1>
-            <!-- /frasi descrittive -->
+        <div id="game_container">
+            <div class="game grill d-flex flex-column flex-nowrap">
+                <!-- frasi descrittive -->
+                <!-- <h1 v-if="click" class="sentence-desc">
+                    <span :class="player == 'x' ? 'colorX' : 'colorO'">{{player}} </span> - Aspetta il tuo turno
+                </h1>
+                <h1 v-else class="sentence-desc">
+                    <span :class="player == 'x' ? 'colorX' : 'colorO'">{{player}} </span> - Tocca a te
+                </h1> -->
+                <!-- /frasi descrittive -->
 
-            <div class="grill d-flex flex-column flex-nowrap">
                 <!-- row 1 -->
                 <div class="row">
 
                     <!-- cella -->
-                    <h2 class="square A1"
+                    <div class="square A1"
                         :class="[winnerCombination.includes('A1') && winner ? 'active' :  '', dbData.A1 == 'x' ? 'colorX' : 'colorO']"
                         @click="clicked('A1')">
                         {{ dbData.A1 }}
-                    </h2>
+                    </div>
                     <!-- /cella -->
 
                     <!-- cella -->
-                    <h2 class="square A2"
+                    <div class="square A2"
                         :class="[winnerCombination.includes('A2') && winner ? 'active' :  '', dbData.A2 == 'x' ? 'colorX' : 'colorO' ]"
                         @click="clicked('A2')">
                         {{ dbData.A2 }}
-                    </h2>
+                    </div>
                     <!-- /cella -->
 
                     <!-- cella -->
-                    <h2 class="square A3"
+                    <div class="square A3"
                         :class="[winnerCombination.includes('A3') && winner ? 'active' :  '', dbData.A3 == 'x' ? 'colorX' : 'colorO' ]"
                         @click="clicked('A3')">
                         {{ dbData.A3 }}
-                    </h2>
+                    </div>
                     <!-- /cella -->
 
                 </div>
@@ -93,27 +73,27 @@
                 <div class="row">
 
                     <!-- cella -->
-                    <h2 class="square B1"
+                    <div class="square B1"
                         :class="[winnerCombination.includes('B1') && winner ? 'active' :  '', dbData.B1 == 'x' ? 'colorX' : 'colorO' ]"
                         @click="clicked('B1')">
                         {{ dbData.B1 }}
-                    </h2>
+                    </div>
                     <!-- /cella -->
 
                     <!-- cella -->
-                    <h2 class="square B2"
+                    <div class="square B2"
                         :class="[winnerCombination.includes('B2') && winner ? 'active' :  '', dbData.B2 == 'x' ? 'colorX' : 'colorO' ]"
                         @click="clicked('B2')">
                         {{ dbData.B2 }}
-                    </h2>
+                    </div>
                     <!-- /cella -->
 
                     <!-- cella -->
-                    <h2 class="square B3"
+                    <div class="square B3"
                         :class="[winnerCombination.includes('B3') && winner ? 'active' :  '', dbData.B3 == 'x' ? 'colorX' : 'colorO' ]"
                         @click="clicked('B3')">
                         {{ dbData.B3 }}
-                    </h2>
+                    </div>
                     <!-- /cella -->
 
                 </div>
@@ -121,46 +101,44 @@
 
                 <!-- row 3-->
                 <div class="row">
-
                     <!-- cella -->
-                    <h2 class="square C1"
+                    <div class="square C1"
                         :class="[winnerCombination.includes('C1') && winner ? 'active' :  '', dbData.C1 == 'x' ? 'colorX' : 'colorO' ]"
                         @click="clicked('C1')">
                         {{ dbData.C1 }}
-                    </h2>
+                    </div>
                     <!-- /cella -->
 
                     <!-- cella -->
-                    <h2 class="square C2"
+                    <div class="square C2"
                         :class="[winnerCombination.includes('C2') && winner ? 'active' :  '', dbData.C2 == 'x' ? 'colorX' : 'colorO' ]"
                         @click="clicked('C2')">
                         {{ dbData.C2 }}
-                    </h2>
+                    </div>
                     <!-- /cella -->
 
                     <!-- cella -->
-                    <h2 class="square C3"
+                    <div class="square C3"
                         :class="[winnerCombination.includes('C3') && winner ? 'active' :  '', dbData.C3 == 'x' ? 'colorX' : 'colorO' ]"
                         @click="clicked('C3')">
                         {{ dbData.C3 }}
-                    </h2>
+                    </div>
                     <!-- /cella -->
 
                 </div>
                 <!-- /row 3-->
+
+
             </div>
-
-
             <div class="w-100">
                 <button class="d-block btn btn-primary m-auto mt-2" @click="reset">RESET</button>
             </div>
         </div>
+
         <!-- /game -->
-
-
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="js/script.js"></script>
 

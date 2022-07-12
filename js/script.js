@@ -38,24 +38,23 @@ var app = new Vue(
             });
             spese = await rawResponse.json();
             console.log(spese);
-            this.toEmptyInput();
+            // this.toEmptyInput();
             // valore url
-            const queryString = window.location.search;
+            // const queryString = window.location.search;
             // salvo l'url
-            const urlParams = new URLSearchParams(queryString);
+            // const urlParams = new URLSearchParams(queryString);
             // valore stanza
-            this.stanza = urlParams.get('stanza');
-            this.join = urlParams.get('join') ? true : false;
+            // this.stanza = urlParams.get('stanza');
+            // this.join = urlParams.get('join') ? true : false;
 
-            // valore player
-            this.player = urlParams.get('player');
-            setInterval(this.getData, 1000);
+            // // valore player
+            // this.player = urlParams.get('player');
+            // setInterval(this.getData, 1000);
         },
 
         methods: {
             // funzione che gestisce il click (asincrona)
             async clicked(coordinata) {
-
                 // controllo primo click
                 if (this.dbData.lastUser != this.player) {
                     this.click = false
@@ -70,6 +69,15 @@ var app = new Vue(
 
                         // pusho la coordinata nello storeClick
                         this.storeClick.push(coordinata)
+                        let form = new FormData();
+                        form.append('coordinata', coordinata);
+
+                        console.log(coordinata);
+                        const response = await fetch('http://localhost:82/balance_app/server.php', {
+                            method: 'post',
+                            body: form
+                        })
+                        spese = await response.json();
                         // chiamata axios
                         const res = await axios.get(`server.php?stanza=${this.stanza}&player=${this.player}&position=${coordinata}`)
                         .catch(e => console.error(e));
@@ -91,14 +99,12 @@ var app = new Vue(
 
                     }
 
-
                     // controllo pareggio
                     // se nClick(count dei click) = 9 e winner e' falso
                     if (this.dbData.nclick == 9 && !this.winner) {
                         alert('Pareggio');
                         this.reset();
                     }
-
                 }
             },
 
@@ -135,13 +141,6 @@ var app = new Vue(
                     .catch(e => console.error(e));
             },
 
-            // svuota gli input
-            toEmptyInput(){
-                this.stanzaInput = '';
-                this.playerInput = '';
-
-            },
-
             // reset game
             reset() {
                 // svuoto i dati della partita
@@ -154,27 +153,7 @@ var app = new Vue(
                 axios.get(`server.php?stanza=${this.stanza}&reset`)
                     .then(r => {})
                     .catch(e => console.error(e));
-            },
-
-            // gestisce il nome utente
-            slug(str) {
-                str = str.replace(/^\s+|\s+$/g, ''); // trim
-                str = str.toLowerCase();
-
-                // remove accents, swap ñ for n, etc
-                var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
-                var to   = "aaaaeeeeiiiioooouuuunc------";
-                for (var i=0, l=from.length ; i<l ; i++) {
-                    str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
-                }
-
-                str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
-                    .replace(/\s+/g, '-') // collapse whitespace and replace by -
-                    .replace(/-+/g, '-'); // collapse dashes
-
-                return str;
             }
-
         },
     }
 )
