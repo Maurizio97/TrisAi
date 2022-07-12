@@ -1,0 +1,33 @@
+[
+    {
+        "1" : {
+            "Mossa1": {
+                "posizione": "A-1",
+                "Giocatore": "Human"
+            },
+            "Mossa2": {
+                "posizione": "A-2",
+                "Giocatore": "CPU"
+            },
+            "Mossa3": {
+                "posizione": "A-3",
+                "Giocatore": "Human"
+            },
+            "chiHaVinto": "Human"
+        },
+        "2" : {
+            "Mossa1": {
+                "posizione": "A-4",
+                "Giocatore": "Human"
+            },
+            "Mossa2": {
+                "posizione": "A-2",
+                "Giocatore": "CPU"
+            },
+            "Mossa3": {
+                "posizione": "A-3",
+                "Giocatore": "Human"
+            }
+        }
+    }
+]

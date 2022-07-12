@@ -27,17 +27,17 @@ var app = new Vue(
 
         async mounted(){
 
-            const rawResponse = await fetch('http://localhost:6969/users', {
-                method: 'get',
-                mode: 'cors',
-                headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin':'*'
-                },
-            });
-            spese = await rawResponse.json();
-            console.log(spese);
+            // const rawResponse = await fetch('http://localhost:6969/game', {
+            //     method: 'get',
+            //     mode: 'cors',
+            //     headers: {
+            //     'Accept': 'application/json',
+            //     'Content-Type': 'application/json',
+            //     'Access-Control-Allow-Origin':'*'
+            //     },
+            // });
+            // spese = await rawResponse.json();
+            // console.log(spese);
             // this.toEmptyInput();
             // valore url
             // const queryString = window.location.search;
@@ -54,50 +54,68 @@ var app = new Vue(
 
         methods: {
             // funzione che gestisce il click (asincrona)
-            async clicked(coordinata) {
+            async clicked(position) {
                 // controllo primo click
-                if (this.dbData.lastUser != this.player) {
-                    this.click = false
-                }
+                // if (this.dbData.lastUser != this.player) {
+                //     this.click = false
+                // }
 
                 // controllo generico click
                 // se storeClick contiene la cella cliccata && click e' falso && winner e' falso
-                if (!this.storeClick.includes(coordinata)
-                    && !this.dbData[coordinata]
-                    && this.click === false
+                if (!this.storeClick.includes(position)
+                    && !this.dbData[position]
+                    // && this.click === false
                     && this.winner == false) {
 
-                        // pusho la coordinata nello storeClick
-                        this.storeClick.push(coordinata)
-                        let form = new FormData();
-                        form.append('coordinata', coordinata);
+                        // pusho la position nello storeClick
+                        this.storeClick.push(position)
+                        console.log(this.storeClick);
+                        // se la lunghezza di storeclick <= 1
+                        let bool = this.storeClick.length > 1? false : true;
+                        json = {
+                            'position': position,
+                            'firstMove': bool
+                        }
 
-                        console.log(coordinata);
-                        const response = await fetch('http://localhost:82/balance_app/server.php', {
+                        data = JSON.stringify(json)
+                        console.log(position);
+                        const response = await fetch('http://localhost:6969/game', {
                             method: 'post',
-                            body: form
+                            headers: {
+                                "Content-Type": "application/json;charset=UTF-8"
+                            },
+                            body: data
                         })
                         spese = await response.json();
-                        // chiamata axios
-                        const res = await axios.get(`server.php?stanza=${this.stanza}&player=${this.player}&position=${coordinata}`)
-                        .catch(e => console.error(e));
+                        console.log(spese);
+                        // const rawResponse = await fetch('http://localhost:6969/game', {
+                        //     method: 'get',
+                        //     mode: 'cors',
+                        //     headers: {
+                        //     'Accept': 'application/json',
+                        //     'Content-Type': 'application/json',
+                        //     'Access-Control-Allow-Origin':'*'
+                        //     },
+                        // });
+                        // spese = await rawResponse.json();
+                        // console.log(spese);
                         // salvo il risultato in dbData
-                        this.dbData = res.data;
+                        // this.dbData = res.data;
                         // valorizzo click con true (non posso cliccare)
                         this.click = true;
 
                         // controllo win
                         // se winner data esiste
-                    if (res.data.winnerData) {
-                        // creo un allert
-                        alert('partita finita ' + res.data.lastUser);
-                        // click e winner diventano'true'
-                        this.click = true;
-                        this.winner = true;
-                        // valorizzo winnerCombination con l'array contente le posizioni delle celle vincenti
-                        this.winnerCombination = res.data.winnerData.ceilWin;
+                    // if (res.data.winnerData) {
+                    //     // creo un allert
+                    //     alert('partita finita ' + res.data.lastUser);
+                    //     // click e winner diventano'true'
+                    //     this.click = true;
+                    //     this.winner = true;
+                    //     // valorizzo winnerCombination con l'array contente le posizioni delle celle vincenti
+                    //     this.winnerCombination = res.data.winnerData.ceilWin;
 
-                    }
+                    // }
 
                     // controllo pareggio
                     // se nClick(count dei click) = 9 e winner e' falso
